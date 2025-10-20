@@ -10,7 +10,7 @@ example of an olympic country:
 
 import { Participation } from "./Participation";
 
-export class OlympicCountry {
+export class Olympic {
 
      constructor(public id: number,
                 public country: string,
