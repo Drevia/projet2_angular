@@ -18,7 +18,9 @@
     <canvas baseChart
             [data]="pieChartData"
             [options]="pieChartOptions"
-            [type]="'pie'">
+            [plugins]="pieChartPlugins"
+            [type]="'pie'"
+            (chartClick)="onChartClick($event)">
     </canvas>
   </div>
 </div>

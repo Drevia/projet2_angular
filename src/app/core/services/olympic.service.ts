@@ -9,7 +9,7 @@ import { Olympic } from '../models/Olympic';
 })
 export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
-  private olympics$ = new BehaviorSubject<any>(undefined);
+  private olympics$ = new BehaviorSubject<Olympic[] | null>(null);
 
   constructor(private http: HttpClient) {}
 
@@ -21,7 +21,8 @@ export class OlympicService {
         console.error(error);
         // can be useful to end loading state and let the user know something went wrong
         this.olympics$.next(null);
-        return caught;
+        throw error;
+        // return caught;
       })
     );
   }
@@ -29,4 +30,6 @@ export class OlympicService {
   getOlympics(): Observable<Olympic[] | null> {
     return this.olympics$.asObservable();
   }
+
+  //methode getOlympicsByID (pour la page détails)
 }
