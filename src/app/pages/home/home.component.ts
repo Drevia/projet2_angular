@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
     responsive: true,
     plugins:{
       legend: {
-       display: false,
+       display: true,
       },
       datalabels: {
         color: '#970707ff',

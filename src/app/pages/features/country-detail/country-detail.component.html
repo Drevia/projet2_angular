@@ -1,0 +1,17 @@
+<div class="details-container" *ngIf="countryName">
+  <h2>{{ countryName }}</h2>
+
+  <div class="stats">
+    <div class="card">Number of entries<br><strong>{{ totalEntries }}</strong></div>
+    <div class="card">Total medals<br><strong>{{ totalMedals }}</strong></div>
+    <div class="card">Total athletes<br><strong>{{ totalAthletes }}</strong></div>
+  </div>
+
+  <canvas baseChart
+    [data]="lineChartData"
+    [options]="lineChartOptions"
+    [type]="'line'">
+  </canvas>
+
+  <button (click)="goBack()" class="back-btn">← Back</button>
+</div>
