@@ -57,7 +57,10 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
 
   loadCountryData() {
     this.olympicService.getOlympicByCountryName(this.countryName).subscribe(country => {
-      if(!country) return;
+      if(!country) {
+        this.router.navigate(['/error']);
+        return;
+      } 
 
       const year = country.participations.map(p => p.year);
       const medals = country.participations.map(p => p.medalsCount);
@@ -68,7 +71,8 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
         (a, p) => a + (p.athleteCount ?? 0), 0
       );
       this.buildChart(country);
-    }/*, error => this.router.navigate(['/error'])*/)
+    },
+    );
   }
 
   buildChart(country: Olympic) {

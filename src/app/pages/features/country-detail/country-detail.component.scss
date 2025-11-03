@@ -1,23 +1,38 @@
-detail-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  padding: 2rem;
-  color: #e5e7eb;
-  background-color: #111827; 
-  min-height: 100vh;
+// detail-container {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   gap: 2rem;
+//   padding: 2rem;
+//   color: #e5e7eb;
+//   background-color: #111827; 
+//   min-height: 100vh;
 
     
+// }
+
+.country-name {
+  background-color: #0E7C7B;
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 12px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2rem;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  letter-spacing: 1px;
 }
 
 .stats {
   display: flex;
-  justify-content: center; /* centre les cards horizontalement */
-  align-items: stretch; /* les rend toutes de la même hauteur */
-  gap: 1.5rem; /* espace entre les cards */
+  justify-content: center;
+  align-items: stretch;
+  gap: 1.5rem;
   margin-bottom: 2rem;
-  flex-wrap: wrap; /* permet de repasser à la ligne sur petits écrans */
+  flex-wrap: wrap;
 }
 
 .card {
@@ -27,13 +42,12 @@ detail-container {
       text-align: center;
       min-width: 180px;
       font-size: 1rem;
-      border: 1px solid #10b981;
+      border: 1px solid #0E7C7B;
       transition: transform 0.2s ease, background-color 0.3s ease;
 
       strong {
         display: block;
-        font-size: 1.8rem;
-        color: #10b981; 
+        font-size: 1.8rem; 
         margin-top: 0.3rem;
       }
 }
@@ -46,6 +60,8 @@ canvas {
     padding: 1rem;
     border-radius: 12px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .back-btn {

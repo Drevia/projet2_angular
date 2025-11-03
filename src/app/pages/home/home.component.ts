@@ -31,6 +31,24 @@ export class HomeComponent implements OnInit {
       legend: {
        display: true,
       },
+      tooltip: {
+        backgroundColor: '#0E7C7B',
+        titleColor: '#FFFFFF',
+        bodyColor: '#FFFFFF',
+        boxPadding: 6,
+        boxWidth: 40,
+        boxHeight: 25,
+        displayColors:false,
+        caretSize: 8,
+        callbacks:{
+          label: (context) => {
+          const medalIcon = '🏅';
+          const value = context.parsed || 0;
+          
+          return [`${medalIcon} ${value}`];
+          }
+        }
+      },
       datalabels: {
         color: '#970707ff',
         font: {weight: 'bold', size: 12},
@@ -58,15 +76,15 @@ export class HomeComponent implements OnInit {
   };
 
   numberOfCountries = 0;
-  numberofJos=0 // nombre distinct d'éditions (années) parmi toutes les participations
+  numberofJos=0
 
   colorPalette = [
-    '#956065', // Marron clair
-    '#B8CBE7', // cyan gris
-    '#9780A1', // violet gris
-    '#89A1DB', // bleu gris
-    '#793D52', // marron rouge
-    '#D97706', // doré atténué
+    '#956065',
+    '#B8CBE7',
+    '#9780A1',
+    '#89A1DB',
+    '#793D52',
+    '#D97706',
   ];
 
   private sub: Subscription | null = null;
@@ -77,9 +95,6 @@ export class HomeComponent implements OnInit {
     this.olympics$ = this.olympicService.getOlympics();
 
     this.CreateCharts();
-    
-
-    
   }
 
   private CreateCharts() {
