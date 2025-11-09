@@ -46,11 +46,6 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
     this.sub = this.route.paramMap.subscribe(params => {
       this.countryName = params.get('countryName') ?? '';
       this.loadCountryData();
-
-      console.log("name: ", this.countryName);
-      console.log("total medals: ", this.totalMedals);
-      console.log("total athletes: ", this.totalAthletes);
-      console.log("entries: ", this.totalEntries);
     })
     
   }
@@ -91,6 +86,7 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
       }]
     };
 
+    //Calculation to have a curve without setting min et max value
     const minValue = Math.min(...data);
     const maxValue = Math.max(...data);
     const range = maxValue - minValue;
