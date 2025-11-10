@@ -4,6 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Don't forget to install your node_modules before starting (`npm install`).
 
+The app is used to see the country who have participated in the Olympic Games and display their medals, participations and the number of athletes.
+
+Ther's two pages. One to see a chart with every country in the globality (which one has the most medals, how many countries...) and the others to see more details about a specific country
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
 
   pieChartData: ChartData<'pie'> = {labels: [], datasets: [{data: [] }] };
 
+  //Configuration for the pie chart
   pieChartOptions: ChartOptions<'pie'> = {
     responsive: true,
     plugins:{
@@ -97,7 +98,9 @@ export class HomeComponent implements OnInit {
     this.CreateCharts();
   }
 
+
   private CreateCharts() {
+    //retrieve all olympics country for the chart
     this.olympicService.getOlympics().pipe(
       map((countries: Olympic[] | null) => {
         if (!countries || countries.length === 0) {
@@ -147,6 +150,7 @@ export class HomeComponent implements OnInit {
   }
 
 
+  //redirection to the country page we click on
   onChartClick(event: any): void {
     if (event.active && event.active.length > 0) {
     const chart = event.active[0].element.$context.chart;

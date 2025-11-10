@@ -24,6 +24,8 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
   totalEntries = 0;
 
   lineChartData: ChartConfiguration<'line'>['data'] = {labels:[], datasets:[]};
+
+  //Configuration for line chart
   lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
     plugins: {
@@ -53,6 +55,7 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
   loadCountryData() {
     this.olympicService.getOlympicByCountryName(this.countryName).subscribe(country => {
       if(!country) {
+        //Redirect user in error page if he try to write a country that doesn't exist in the url
         this.router.navigate(['/error']);
         return;
       } 
@@ -70,6 +73,7 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
     );
   }
 
+  //Create a Line chart using data from one country
   buildChart(country: Olympic) {
     const labels = country.participations.map(p => p.year);
     const data = country.participations.map(p => p.medalsCount);
