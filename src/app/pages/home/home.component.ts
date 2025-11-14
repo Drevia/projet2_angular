@@ -17,6 +17,8 @@ Chart.register(ChartDataLabels);
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+
+   /** Shared observable of all Olympic countries */
   public olympics$: Observable<Olympic[] | null> = of(null);
   public italyParticipationsCount$: Observable<number> = of(0);
   public italyMedalsCount$: Observable<number> = of(0);
@@ -43,6 +45,7 @@ export class HomeComponent implements OnInit {
         caretSize: 8,
         callbacks:{
           label: (context) => {
+            // Displays a medal icon + value
           const medalIcon = '🏅';
           const value = context.parsed || 0;
           
@@ -65,7 +68,7 @@ export class HomeComponent implements OnInit {
         borderRadius: 4,
         backgroundColor: (ctx: any) => {
         const bg = (ctx.dataset as any).backgroundColor;
-        // si bg est un tableau on prend la couleur à l'index, sinon on retourne bg ou fallback
+        // if bg is an array we take index color, else we return bg or fallback
         if (Array.isArray(bg)) {
           return bg[ctx.dataIndex] ?? '#000000';
         }
@@ -92,15 +95,18 @@ export class HomeComponent implements OnInit {
 
   constructor(private olympicService: OlympicService, private router: Router) {}
 
+  /** Loads all olympics data when component initializes */
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
 
     this.CreateCharts();
   }
 
-
+  /**
+   * Builds the pie chart using global Olympic data.
+   * Computes total medals, number of countries, and number of JO editions.
+   */
   private CreateCharts() {
-    //retrieve all olympics country for the chart
     this.olympicService.getOlympics().pipe(
       map((countries: Olympic[] | null) => {
         if (!countries || countries.length === 0) {
@@ -113,7 +119,6 @@ export class HomeComponent implements OnInit {
           (acc, p) => acc + (p?.medalsCount ?? 0), 0)
         );
 
-        // calcul du nombre d'années distinctes (nombre de JO)
         const yearSet = new Set<number>();
 
         countries.forEach(c => {

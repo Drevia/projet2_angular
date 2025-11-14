@@ -18,6 +18,8 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   styleUrls: ['./country-detail.component.scss']
 })
 export class CountryDetailComponent implements OnInit, OnDestroy {
+
+  //Stats for the country
   countryName = '';
   totalMedals = 0;
   totalAthletes = 0;
@@ -44,6 +46,8 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
     private olympicService: OlympicService
   ) {}
 
+
+  /** Retrieves Country name from URL and loads its data */
   ngOnInit(): void {
     this.sub = this.route.paramMap.subscribe(params => {
       this.countryName = params.get('countryName') ?? '';
@@ -52,10 +56,13 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
     
   }
 
+  /**
+   * Fetches Olympic data for the country
+   * Redirects to /error URL if the country does not exist
+   */
   loadCountryData() {
     this.olympicService.getOlympicByCountryName(this.countryName).subscribe(country => {
       if(!country) {
-        //Redirect user in error page if he try to write a country that doesn't exist in the url
         this.router.navigate(['/error']);
         return;
       } 
@@ -73,7 +80,10 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
     );
   }
 
-  //Create a Line chart using data from one country
+  /**
+   * Builds a line chart for one specific country.
+   * Automatically computes chart scale for a cleaner curve.
+   */
   buildChart(country: Olympic) {
     const labels = country.participations.map(p => p.year);
     const data = country.participations.map(p => p.medalsCount);
@@ -90,7 +100,7 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
       }]
     };
 
-    //Calculation to have a curve without setting min et max value
+    // Auto-scale Y axis for better readability
     const minValue = Math.min(...data);
     const maxValue = Math.max(...data);
     const range = maxValue - minValue;
